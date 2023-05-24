@@ -38,6 +38,16 @@ printf "alias ibrew=\"arch -x86_64 /usr/local/bin/brew\"" >>$HOME/.zshrc
 printf "\nalias cl=\"clear\"" >>$HOME/.zshrc
 printf "\nalias ll=\"ls -l\"" >>$HOME/.zshrc
 printf "\nalias la=\"ls -la\"" >>$HOME/.zshrc
+printf "\nalias ..=\"cd ..\"" >>$HOME/.zshrc
+printf "\nalias ..2=\"cd ../..\"" >>$HOME/.zshrc
+printf "\nalias ..3=\"cd ../../..\"" >>$HOME/.zshrc
+printf "\nalias ..4=\"cd ../../../..\"" >>$HOME/.zshrc
+printf "\nalias ..5=\"cd ../../../../..\"" >>$HOME/.zshrc
+printf "\nalias ..u=\"cd \$HOME\"" >>$HOME/.zshrc
+printf "\nalias :q=\"exit\"" >>$HOME/.zshrc
+printf "\nalias pbc=\"pbcopy\"" >>$HOME/.zshrc
+printf "\nalias pbp=\"pbpaste\"" >>$HOME/.zshrc
+
 echo -e "${ORANGE}---------------------------------------------------------------------------------------------------${NC}"
 
 #install brew packages used in the setup
