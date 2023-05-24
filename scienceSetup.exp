@@ -1,0 +1,122 @@
+#!/usr/bin/expect -f
+set timeout -1
+
+
+# stty -echo turn off displaying users typing
+# stty echo turn on displaying users typing
+
+set HOME "$::env(HOME)"
+# get user data
+stty -echo
+send_user -- "Password:"
+expect_user -re "(.*)\n"
+send_user "\n"
+set PASSWORD $expect_out(1,string)
+stty echo
+
+send_user -- "Enter first name: "
+expect_user -re "(.*)\n"
+# send_user "\n"
+set FIRSTNAME $expect_out(1,string)
+
+send_user -- "Enter last name: "
+expect_user -re "(.*)\n"
+# send_user "\n"
+set LASTNAME $expect_out(1,string)
+
+send_user -- "Enter dexcom email: "
+expect_user -re "(.*)\n"
+# send_user "\n"
+set EMAIL $expect_out(1,string)
+
+stty -echo
+send_user -- "Enter a passphrase for github ssh key: "
+expect_user -re "(.*)\n"
+send_user "\n"
+set GHPASSPHRASE $expect_out(1,string)
+stty echo
+
+stty -echo
+send_user -- "Enter a passphrase for codecommit ssh key: "
+expect_user -re "(.*)\n"
+send_user "\n"
+set CCPASSPHRASE $expect_out(1,string)
+stty echo
+
+stty -echo
+send_user -- "Enter github access token:"
+expect_user -re "(.*)\n"
+send_user "\n"
+set GHAT $expect_out(1,string)
+stty echo
+
+stty -echo
+send_user -- "Enter aws access key:"
+expect_user -re "(.*)\n"
+send_user "\n"
+set AWSACCESSKEY $expect_out(1,string)
+stty echo
+
+stty -echo
+send_user -- "Enter aws secret access key:"
+expect_user -re "(.*)\n"
+send_user "\n"
+set AWSSECRETACCESSKEY $expect_out(1,string)
+stty echo
+
+log_user 0
+spawn bash -c ./scienceSetup.sh
+log_user 1
+
+#User info
+expect "Enter your first name"
+send -- "$FIRSTNAME\r"
+expect "Enter your last name"
+send -- "$LASTNAME\r"
+expect "Enter your dexcom email address"
+send -- "$EMAIL\r"
+expect "Enter your github ssh key passphrase"
+send -- "$GHPASSPHRASE\r"
+expect "Enter your codecommit ssh key passphrase"
+send -- "$CCPASSPHRASE\r"
+
+#Install homebrew
+expect "Password:"
+send -- "$PASSWORD\r"
+expect "* to continue or any other key to abort:\r"
+send -- "\r"
+
+#Install ibrew (x86_64 homebrew)
+expect "Password:"
+send -- "$PASSWORD\r"
+expect "* to continue or any other key to abort:\r"
+send -- "\r"
+
+#hombrew packages
+#gpg
+expect "Password:"
+send -- "$PASSWORD\r"
+# WORKING POINT #######################################################################################################
+
+#github access token
+expect "Paste the github access token here then hit enter"
+send -- "$GHAT\r"
+
+#aws access key
+expect "Copy the  'Access Key' id and paste it here then hit enter"
+send -- "$AWSACCESSKEY\r"
+expect "Copy the  'Secret access key' and paste it here then hit enter"
+send -- "$AWSSECRETACCESSKEY\r"
+
+#ssh-add to clone repos
+expect "Enter passphrase for $HOME/.ssh/codecommit_rsa:"
+send -- "$CCPASSPHRASE\r"
+expect "Enter passphrase for $HOME/.ssh/id_ed25519:"
+send -- "$GHPASSPHRASE\r"
+
+#docker
+expect "Password:"
+send -- "$PASSWORD\r"
+# TEST POINT ##########################################################################################################
+
+expect eof
