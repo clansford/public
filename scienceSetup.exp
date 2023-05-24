@@ -96,7 +96,6 @@ send -- "\r"
 #gpg
 expect "Password:"
 send -- "$PASSWORD\r"
-# WORKING POINT #######################################################################################################
 
 #github access token
 expect "Paste the github access token here then hit enter"
@@ -114,9 +113,7 @@ send -- "$CCPASSPHRASE\r"
 expect "Enter passphrase for $HOME/.ssh/id_ed25519:"
 send -- "$GHPASSPHRASE\r"
 
-#docker
-expect "Password:"
-send -- "$PASSWORD\r"
+# WORKING POINT #######################################################################################################
 # TEST POINT ##########################################################################################################
 
 expect eof
