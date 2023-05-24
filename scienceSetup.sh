@@ -180,6 +180,12 @@ sudo hdiutil attach $HOME/Downloads/Docker.dmg
 sudo /Volumes/Docker/Docker.app/Contents/MacOS/install --accept-license
 sudo hdiutil detach /Volumes/Docker
 echo -e "${ORANGE}---------------------------------------------------------------------------------------------------${NC}"
+echo -e "${ORANGE}SOURCE ZSH FILES${NC}"
+
+echo -e "${ORANGE}---------------------------------------------------------------------------------------------------${NC}"
+source $HOME/.zshenv
+source $HOME/.zprofile
+source $HOME/.zshrc
 echo -e "${ORANGE}INSTALLATION SCRIPT COMPLETE${NC}"
 # WORKING POINT #######################################################################################################
 # TEST POINT ##########################################################################################################
