@@ -1,10 +1,6 @@
 #!/usr/bin/expect -f
 set timeout -1
 
-
-# stty -echo turn off displaying users typing
-# stty echo turn on displaying users typing
-
 set HOME "$::env(HOME)"
 # get user data
 stty -echo
@@ -112,8 +108,5 @@ expect "Enter passphrase for $HOME/.ssh/codecommit_rsa:"
 send -- "$CCPASSPHRASE\r"
 expect "Enter passphrase for $HOME/.ssh/id_ed25519:"
 send -- "$GHPASSPHRASE\r"
-
-# WORKING POINT #######################################################################################################
-# TEST POINT ##########################################################################################################
 
 expect eof

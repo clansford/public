@@ -1,13 +1,19 @@
 #!/bin/bash
 
+#explanations
+#script works in conjuection witn scienceSetup.exp to move all user inputs to front. Tried to just have one but 
+#  non-interactive homebrew is a pain in the ass. It requires super user priveleges yet can't be run as root and I didn't
+#  feel like adding a user to the sudoers group if I can even do that for theses machines.
+#Ibrew is used b/c the scientists can use python3.7, if they ever move on it can be removed. Side note, it can't be
+#  deleted after installing python3.7 b/c it's used to run it.
+
 # colors ################################################################################################################
 GREEN='\033[0;32m'
 CYAN='\033[1;36m'
 ORANGE='\033[1;33m'
 NC='\033[0m'
-#######################################################################################################################
 
-#get user info
+#get user info upfront
 read -s -p $'\033[0;36mEnter your first name\033[0m\n' FIRSTNAME
 read -s -p $'\033[0;36mEnter your last name\033[0m\n' LASTNAME
 read -s -p $'\033[0;36mEnter your dexcom email address\033[0m\n' EMAIL
@@ -53,11 +59,11 @@ echo -e "${ORANGE}--------------------------------------------------------------
 #install brew packages used in the setup
 echo -e "${ORANGE}INSTALLING BREW PACKAGES${NC}"
 brew install -q parallel
-brew install -q --cask gpg-suite #not in parallel so expect can input password
-#only put casks in parallel
+brew install -q --cask gpg-suite #not in parallel so expect file can input password
+#only put casks in parallel. (FFM, yes it's faster I tested it)
 parallel brew install -q --cask ::: pycharm slack
 
-#not in parallel becuase brew processes lock for formula
+#not in parallel becuase brew processes locking causes problems
 brew install -q automake
 brew install -q awscli
 brew install -q cmocka
@@ -173,7 +179,7 @@ git clone git@github.com:Type-Zero/sprinkles.git
 git clone git@github.com:Type-Zero/agile-pony.git
 echo -e "${ORANGE}---------------------------------------------------------------------------------------------------${NC}"
 
-# docker setup, opening docker desktop won't work in vm becuase it doesn't support a hypervisor
+# docker setup, opening docker desktop won't work in vm becuase utm doesn't support a hypervisor
 echo -e "${ORANGE}DOCKER SETUP${NC}"
 curl --output $HOME/Downloads/Docker.dmg "https://desktop.docker.com/mac/main/arm64/Docker.dmg?utm_source=docker&utm_medium=webreferral&utm_campaign=dd-smartbutton&utm_location=module"
 sudo hdiutil attach $HOME/Downloads/Docker.dmg
@@ -187,5 +193,3 @@ source $HOME/.zshenv
 source $HOME/.zprofile
 source $HOME/.zshrc
 echo -e "${ORANGE}INSTALLATION SCRIPT COMPLETE${NC}"
-# WORKING POINT #######################################################################################################
-# TEST POINT ##########################################################################################################
