@@ -1,11 +1,11 @@
 #!/bin/bash
 
 #explanations
-#script works in conjuection witn scienceSetup.exp to move all user inputs to front. Tried to just have one but 
-#  non-interactive homebrew is a pain in the ass. It requires super user priveleges yet can't be run as root and I didn't
-#  feel like adding a user to the sudoers group if I can even do that for theses machines.
-#Ibrew is used b/c the scientists can use python3.7, if they ever move on it can be removed. Side note, it can't be
-#  deleted after installing python3.7 b/c it's used to run it.
+#script works in conjuention witn scienceSetup.exp to move all user inputs to front. I Tried to just have one script but 
+#  installing homebrew non-interactively is a pain. It requires super user priveleges yet can't be run as root and I didn't
+#  feel like adding a user to the sudoers group if I can even do that for these machines.
+#Ibrew is used b/c the scientists use python3.7, if they move passed 3.7 ibrew can be removed. Side note, don't delete
+#    ibrew after install python3.7 b/c it is required to run python3.7
 
 # colors ################################################################################################################
 GREEN='\033[0;32m'
